@@ -1,17 +1,17 @@
-// ========================================
+// ==========================================
 // CONFIGURAÇÃO DO SUPABASE
-// ========================================
+// ==========================================
 
 const SUPABASE_URL = "https://vtzdciupcnmhjzfnnplv.supabase.co";
 
-const SUPABASE_ANON_KEY = "sb_publishable_kEWDkp4xw6MyBGC95aRv3A_XsWZ6GWl";
+const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICA_DO_SUPABASE";
 
 const BUCKET_NAME = "Julia18";
 
 
-// ========================================
+// ==========================================
 // CONECTAR AO SUPABASE
-// ========================================
+// ==========================================
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
@@ -19,9 +19,9 @@ const supabaseClient = supabase.createClient(
 );
 
 
-// ========================================
-// ELEMENTOS DO SITE
-// ========================================
+// ==========================================
+// ELEMENTOS DA PÁGINA
+// ==========================================
 
 const photoInput = document.getElementById("photoInput");
 
@@ -29,63 +29,148 @@ const status = document.getElementById("status");
 
 const photosGrid = document.getElementById("photosGrid");
 
+const galleryButton = document.getElementById("galleryButton");
 
-// ========================================
-// CARREGAR AS FOTOS DA GALERIA
-// ========================================
+
+// ==========================================
+// BOTÃO PARA IR ATÉ A GALERIA
+// ==========================================
+
+if (galleryButton) {
+
+  galleryButton.addEventListener("click", function () {
+
+    document
+      .getElementById("gallery")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  });
+
+}
+
+
+// ==========================================
+// CARREGAR FOTOS DIRETAMENTE DO BUCKET
+// ==========================================
 
 async function loadPhotos() {
 
-  console.log("Carregando fotos...");
+  photosGrid.innerHTML =
+    "<p>Carregando fotos...</p>";
 
-  const { data, error } = await supabaseClient
-    .from("photos")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
 
+  const { data, error } =
+    await supabaseClient
+      .storage
+      .from(BUCKET_NAME)
+      .list("", {
+        limit: 100,
+        offset: 0,
+        sortBy: {
+          column: "created_at",
+          order: "desc"
+        }
+      });
+
+
+  // ==========================================
+  // CASO DÊ ERRO
+  // ==========================================
 
   if (error) {
 
-    console.error("Erro ao carregar fotos:", error);
+    console.error(
+      "ERRO AO CARREGAR FOTOS:",
+      error
+    );
+
 
     photosGrid.innerHTML =
-      "<p>Não foi possível carregar as fotos.</p>";
+      "<p>Erro ao carregar fotos: " +
+      error.message +
+      "</p>";
 
     return;
 
   }
 
 
-  // Limpar galeria antes de carregar novamente
+  // Limpar mensagem de carregamento
 
   photosGrid.innerHTML = "";
 
 
-  // Caso ainda não tenha nenhuma foto
+  // ==========================================
+  // CASO NÃO TENHA FOTOS
+  // ==========================================
 
   if (!data || data.length === 0) {
 
     photosGrid.innerHTML =
-      "<p class='empty-gallery'>Ainda não há fotos. Seja o primeiro a registrar esse momento! 📸✨</p>";
+      "<p class='empty-gallery'>Ainda não há fotos. Seja o primeiro a registrar essa noite! 📸✨</p>";
 
     return;
 
   }
 
 
-  // Criar cada imagem da galeria
+  // ==========================================
+  // CRIAR IMAGENS DA GALERIA
+  // ==========================================
 
-  data.forEach(photo => {
+  data.forEach(function (file) {
 
-    const img = document.createElement("img");
 
-    img.src = photo.image_url;
+    // Ignorar pastas
 
-    img.alt = "Foto da festa";
+    if (!file.name) {
+      return;
+    }
 
-    img.loading = "lazy";
+
+    // Criar URL pública da foto
+
+    const { data: publicUrlData } =
+      supabaseClient
+        .storage
+        .from(BUCKET_NAME)
+        .getPublicUrl(file.name);
+
+
+    const imageUrl =
+      publicUrlData.publicUrl;
+
+
+    // Criar elemento da imagem
+
+    const img =
+      document.createElement("img");
+
+
+    img.src =
+      imageUrl;
+
+
+    img.alt =
+      "Foto da festa";
+
+
+    img.loading =
+      "lazy";
+
+
+    // Caso uma imagem não carregue
+
+    img.onerror = function () {
+
+      console.error(
+        "Não foi possível carregar:",
+        file.name
+      );
+
+    };
 
 
     photosGrid.appendChild(img);
@@ -95,47 +180,58 @@ async function loadPhotos() {
 }
 
 
-// ========================================
+// ==========================================
 // ENVIAR FOTO
-// ========================================
+// ==========================================
 
-photoInput.addEventListener("change", async function () {
-
-  const file = photoInput.files[0];
-
-
-  // Verificar se existe arquivo
-
-  if (!file) return;
+photoInput.addEventListener(
+  "change",
+  async function () {
 
 
-  // Verificar se é imagem
+    const file =
+      photoInput.files[0];
 
-  if (!file.type.startsWith("image/")) {
+
+    // Se não escolheu nenhuma foto
+
+    if (!file) {
+
+      return;
+
+    }
+
+
+    // Verificar se é uma imagem
+
+    if (!file.type.startsWith("image/")) {
+
+      status.innerText =
+        "Por favor, escolha apenas uma imagem. 📸";
+
+      photoInput.value =
+        "";
+
+      return;
+
+    }
+
+
+    // Mensagem de carregamento
 
     status.innerText =
-      "Por favor, selecione apenas uma imagem. 📸";
-
-    photoInput.value = "";
-
-    return;
-
-  }
+      "Enviando sua foto... 📸✨";
 
 
-  // Mensagem durante o envio
+    // ==========================================
+    // CRIAR NOME ÚNICO
+    // ==========================================
 
-  status.innerText =
-    "Enviando sua foto... 📸✨";
-
-
-  try {
-
-
-    // Criar nome único para a foto
-
-    const fileExtension =
-      file.name.split(".").pop();
+    const extension =
+      file.name
+        .split(".")
+        .pop()
+        .toLowerCase();
 
 
     const fileName =
@@ -146,146 +242,99 @@ photoInput.addEventListener("change", async function () {
         .toString(36)
         .substring(2, 10) +
       "." +
-      fileExtension;
+      extension;
 
 
-    console.log("Enviando foto:", fileName);
+    try {
 
 
-    // ========================================
-    // ENVIAR FOTO PARA O STORAGE
-    // ========================================
+      // ==========================================
+      // ENVIAR PARA O BUCKET
+      // ==========================================
 
-    const { error: uploadError } =
-      await supabaseClient
-        .storage
-        .from(BUCKET_NAME)
-        .upload(
-          fileName,
-          file,
-          {
-            cacheControl: "3600",
-            upsert: false
-          }
+      const { data, error } =
+        await supabaseClient
+          .storage
+          .from(BUCKET_NAME)
+          .upload(
+            fileName,
+            file,
+            {
+              cacheControl: "3600",
+              upsert: false
+            }
+          );
+
+
+      // ==========================================
+      // CASO DÊ ERRO
+      // ==========================================
+
+      if (error) {
+
+        console.error(
+          "ERRO NO UPLOAD:",
+          error
         );
 
 
-    // Caso aconteça erro no upload
+        status.innerText =
+          "Erro ao enviar: " +
+          error.message;
 
-    if (uploadError) {
+        return;
 
-      console.error(
-        "Erro no upload:",
-        uploadError
+      }
+
+
+      console.log(
+        "Foto enviada com sucesso:",
+        data
       );
 
+
+      // ==========================================
+      // SUCESSO
+      // ==========================================
+
       status.innerText =
-        "Ops! Não foi possível enviar a foto. 😢";
-
-      return;
-
-    }
+        "✨ Foto enviada com sucesso!";
 
 
-    console.log(
-      "Foto enviada para o Storage com sucesso!"
-    );
+      // Limpar seleção
+
+      photoInput.value =
+        "";
 
 
-    // ========================================
-    // PEGAR URL PÚBLICA DA FOTO
-    // ========================================
+      // ==========================================
+      // ATUALIZAR GALERIA
+      // ==========================================
 
-    const { data: publicUrlData } =
-      supabaseClient
-        .storage
-        .from(BUCKET_NAME)
-        .getPublicUrl(fileName);
+      await loadPhotos();
 
 
-    const imageUrl =
-      publicUrlData.publicUrl;
+    } catch (error) {
 
-
-    console.log(
-      "URL da foto:",
-      imageUrl
-    );
-
-
-    // ========================================
-    // SALVAR FOTO NA TABELA PHOTOS
-    // ========================================
-
-    const { error: databaseError } =
-      await supabaseClient
-        .from("photos")
-        .insert([
-          {
-            image_url: imageUrl
-          }
-        ]);
-
-
-    // Caso aconteça erro no banco
-
-    if (databaseError) {
 
       console.error(
-        "Erro ao salvar no banco:",
-        databaseError
+        "ERRO INESPERADO:",
+        error
       );
 
-      status.innerText =
-        "A foto foi enviada, mas não conseguimos adicioná-la à galeria. 😢";
 
-      return;
+      status.innerText =
+        "Erro inesperado: " +
+        error.message;
 
     }
-
-
-    // ========================================
-    // SUCESSO
-    // ========================================
-
-    console.log(
-      "Foto adicionada à galeria com sucesso!"
-    );
-
-
-    status.innerText =
-      " Foto enviada com sucesso! Obrigada por registrar esse momento! ✨";
-
-
-    // Limpar o input
-
-    photoInput.value = "";
-
-
-    // Atualizar galeria
-
-    await loadPhotos();
-
-
-  } catch (error) {
-
-
-    console.error(
-      "Erro inesperado:",
-      error
-    );
-
-
-    status.innerText =
-      "Ops! Ocorreu um erro inesperado. Tente novamente. 😢";
 
   }
+);
 
-});
 
-
-// ========================================
+// ==========================================
 // CARREGAR GALERIA AO ABRIR O SITE
-// ========================================
+// ==========================================
 
 loadPhotos();
