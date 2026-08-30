@@ -124,8 +124,8 @@ async function loadPhotos() {
       const img =
         document.createElement("img");
 
-      // Não mostra texto caso a imagem falhe
-      img.alt = "";
+      img.src = publicUrlData.publicUrl;
+      img.alt = "Foto da festa";
       img.loading = "lazy";
 
       img.onerror = function () {
@@ -133,12 +133,7 @@ async function loadPhotos() {
           "ERRO AO ABRIR FOTO:",
           file.name
         );
-
-        // Remove imagens quebradas da galeria
-        img.remove();
       };
-
-      img.src = publicUrlData.publicUrl;
 
       photosGrid.appendChild(img);
     });
