@@ -124,18 +124,9 @@ async function loadPhotos() {
       const img =
         document.createElement("img");
 
-      /*
-        A foto começa escondida e só aparece
-        depois de carregar corretamente.
-      */
-
-      img.style.display = "none";
+      // Não mostra texto caso a imagem falhe
       img.alt = "";
       img.loading = "lazy";
-
-      img.onload = function () {
-        img.style.display = "block";
-      };
 
       img.onerror = function () {
         console.error(
