@@ -2,70 +2,131 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Minha Festa de 18 Anos</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#fff8ef">
+
+  <title>Júlia 18 anos | Memórias da Festa</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="container">
+  <main class="container">
 
-    <div class="hero">
+    <!-- TELA INICIAL -->
+    <section class="hero">
 
-      <div class="sparkle">✦</div>
+      <!-- Elementos somente decorativos -->
+      <div class="floral floral-top" aria-hidden="true"></div>
+      <div class="floral floral-bottom" aria-hidden="true"></div>
 
-      <p class="small-title">UMA NOITE PARA LEMBRAR</p>
+      <span class="sparkle sparkle-one" aria-hidden="true">✦</span>
+      <span class="sparkle sparkle-two" aria-hidden="true">✦</span>
+      <span class="sparkle sparkle-three" aria-hidden="true">✧</span>
 
-      <h1>Meus 18 anos</h1>
+      <div class="hero-content">
 
-      <p class="subtitle">
-        Registre os melhores momentos dessa noite
-        e ajude a guardar memórias inesquecíveis. ✨
-      </p>
+        <p class="event-date">12 • 09 • 2026</p>
 
-      <label for="photoInput" class="upload-button">
-        📸 Tirar ou enviar foto
-      </label>
+        <p class="small-title">UMA TARDE PARA FLORESCER</p>
 
-      <input
-        type="file"
-        id="photoInput"
-        accept="image/*"
-        capture="environment"
-        hidden
-      >
+        <div class="title-wrapper">
+          <span class="age-number" aria-hidden="true">18</span>
+          <h1>Júlia</h1>
+        </div>
 
-      <p id="status"></p>
+        <p class="subtitle">
+          Uma tarde para celebrar, registrar
+          e guardar para sempre.
+        </p>
 
-      <a href="#gallery" class="gallery-button">
-        Ver fotos da festa ↓
-      </a>
+        <!-- Botão para tirar ou enviar a foto -->
+        <label for="photoInput" class="upload-button">
+          <span class="button-icon" aria-hidden="true">📸</span>
+          <span>Tirar ou enviar foto</span>
+        </label>
 
-    </div>
+        <!-- Não altere este campo -->
+        <input
+          type="file"
+          id="photoInput"
+          accept="image/*"
+          capture="environment"
+          hidden
+        >
 
+        <!-- Mensagem apresentada pelo script -->
+        <p id="status" class="upload-status" aria-live="polite"></p>
 
-    <section id="gallery">
+        <!-- Botão para acessar as fotos -->
+        <a
+          href="#gallery"
+          id="galleryButton"
+          class="gallery-button"
+        >
+          <span>Ver fotos da festa</span>
+          <span class="arrow" aria-hidden="true">↓</span>
+        </a>
 
-      <p class="small-title">MEMÓRIAS DA NOITE</p>
+      </div>
 
-      <h2>Galeria</h2>
-
-      <div id="photosGrid" class="photos-grid"></div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>DESCUBRA AS MEMÓRIAS</span>
+        <span class="scroll-line"></span>
+      </div>
 
     </section>
 
-  </div>
+    <!-- TRANSIÇÃO ENTRE AS SEÇÕES -->
+    <div class="section-transition" aria-hidden="true">
+      <span></span>
+      <span class="transition-flower">✿</span>
+      <span></span>
+    </div>
 
+    <!-- GALERIA -->
+    <section id="gallery" class="gallery-section">
+
+      <header class="gallery-header">
+
+        <p class="small-title">MEMÓRIAS DA TARDE</p>
+
+        <h2>Nosso álbum</h2>
+
+        <p class="gallery-description">
+          Cada foto guarda um pedacinho desta tarde especial.
+        </p>
+
+      </header>
+
+      <!-- O script continuará colocando as fotos aqui -->
+      <div id="photosGrid" class="photos-grid"></div>
+
+      <div class="gallery-footer" aria-hidden="true">
+        <span>Com carinho, Júlia</span>
+        <span class="footer-heart">♡</span>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Não alterar estes scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script src="script.js"></script>
 
 </body>
