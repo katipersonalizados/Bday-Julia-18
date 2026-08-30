@@ -4,7 +4,7 @@
 
 const SUPABASE_URL = "https://vtzdciupcnmhjzfnnplv.supabase.co";
 
-const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICA_DO_SUPABASE";
+const SUPABASE_ANON_KEY = "sb_publishable_kEWDkp4xw6MyBGC95aRv3A_XsWZ6GWl";
 
 const BUCKET_NAME = "Julia18";
 
