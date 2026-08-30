@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Minha Festa de 18 Anos</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="hero">
+
+      <div class="sparkle">✦</div>
+
+      <p class="small-title">UMA NOITE PARA LEMBRAR</p>
+
+      <h1>Meus 18 anos</h1>
+
+      <p class="subtitle">
+        Registre os melhores momentos dessa noite
+        e ajude a guardar memórias inesquecíveis. ✨
+      </p>
+
+      <label for="photoInput" class="upload-button">
+        📸 Tirar ou enviar foto
+      </label>
+
+      <input
+        type="file"
+        id="photoInput"
+        accept="image/*"
+        capture="environment"
+        hidden
+      >
+
+      <p id="status"></p>
+
+      <a href="#gallery" class="gallery-button">
+        Ver fotos da festa ↓
+      </a>
+
+    </div>
+
+
+    <section id="gallery">
+
+      <p class="small-title">MEMÓRIAS DA NOITE</p>
+
+      <h2>Galeria</h2>
+
+      <div id="photosGrid" class="photos-grid"></div>
+
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
