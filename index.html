@@ -13,7 +13,12 @@
   <title>Júlia 18 anos | Memórias da Festa</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
@@ -30,23 +35,56 @@
     <!-- TELA INICIAL -->
     <section class="hero">
 
-      <!-- Elementos somente decorativos -->
-      <div class="floral floral-top" aria-hidden="true"></div>
-      <div class="floral floral-bottom" aria-hidden="true"></div>
+      <!-- Flores decorativas -->
+      <div
+        class="floral floral-top"
+        aria-hidden="true"
+      ></div>
 
-      <span class="sparkle sparkle-one" aria-hidden="true">✦</span>
-      <span class="sparkle sparkle-two" aria-hidden="true">✦</span>
-      <span class="sparkle sparkle-three" aria-hidden="true">✧</span>
+      <div
+        class="floral floral-bottom"
+        aria-hidden="true"
+      ></div>
 
+      <!-- Brilhos decorativos -->
+      <span
+        class="sparkle sparkle-one"
+        aria-hidden="true"
+      >✦</span>
+
+      <span
+        class="sparkle sparkle-two"
+        aria-hidden="true"
+      >✦</span>
+
+      <span
+        class="sparkle sparkle-three"
+        aria-hidden="true"
+      >✧</span>
+
+
+      <!-- CONTEÚDO -->
       <div class="hero-content">
 
-        <p class="event-date">12 • 09 • 2026</p>
+        <p class="event-date">
+          12 • 09 • 2026
+        </p>
 
-        <p class="small-title">UMA TARDE PARA FLORESCER</p>
+        <p class="small-title">
+          UMA TARDE PARA FLORESCER
+        </p>
 
         <div class="title-wrapper">
-          <span class="age-number" aria-hidden="true">18</span>
+
+          <span
+            class="age-number"
+            aria-hidden="true"
+          >
+            18
+          </span>
+
           <h1>Júlia</h1>
+
         </div>
 
         <p class="subtitle">
@@ -54,13 +92,89 @@
           e guardar para sempre.
         </p>
 
-        <!-- Botão para tirar ou enviar a foto -->
-        <label for="photoInput" class="upload-button">
-          <span class="button-icon" aria-hidden="true">📸</span>
+
+        <!-- ESCOLHA DA MOLDURA -->
+        <div class="frame-selector">
+
+          <p class="frame-title">
+            Escolha como deseja enviar:
+          </p>
+
+          <div class="frame-options">
+
+            <!-- SEM MOLDURA -->
+            <label class="frame-option">
+
+              <input
+                type="radio"
+                name="frameOption"
+                value="none"
+                checked
+              >
+
+              <span class="frame-card no-frame">
+
+                <span class="frame-preview-icon">
+                  📷
+                </span>
+
+                <strong>Sem moldura</strong>
+
+                <small>Foto original</small>
+
+              </span>
+
+            </label>
+
+
+            <!-- COM MOLDURA -->
+            <label class="frame-option">
+
+              <input
+                type="radio"
+                name="frameOption"
+                value="floral"
+              >
+
+              <span class="frame-card">
+
+                <img
+                  src="moldura.png"
+                  alt="Moldura floral Júlia 18 anos"
+                >
+
+                <strong>Com moldura</strong>
+
+                <small>Júlia 18 anos</small>
+
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- BOTÃO PARA ENVIAR FOTO -->
+        <label
+          for="photoInput"
+          class="upload-button"
+        >
+
+          <span
+            class="button-icon"
+            aria-hidden="true"
+          >
+            📸
+          </span>
+
           <span>Tirar ou enviar foto</span>
+
         </label>
 
-        <!-- Não altere este campo -->
+
+        <!-- CAMPO UTILIZADO PELO SCRIPT -->
         <input
           type="file"
           id="photoInput"
@@ -69,64 +183,119 @@
           hidden
         >
 
-        <!-- Mensagem apresentada pelo script -->
-        <p id="status" class="upload-status" aria-live="polite"></p>
 
-        <!-- Botão para acessar as fotos -->
+        <!-- MENSAGEM DE ENVIO -->
+        <p
+          id="status"
+          class="upload-status"
+          aria-live="polite"
+        ></p>
+
+
+        <!-- BOTÃO DA GALERIA -->
         <a
           href="#gallery"
           id="galleryButton"
           class="gallery-button"
         >
+
           <span>Ver fotos da festa</span>
-          <span class="arrow" aria-hidden="true">↓</span>
+
+          <span
+            class="arrow"
+            aria-hidden="true"
+          >
+            ↓
+          </span>
+
         </a>
 
       </div>
 
-      <div class="scroll-indicator" aria-hidden="true">
+
+      <!-- INDICAÇÃO DE ROLAGEM -->
+      <div
+        class="scroll-indicator"
+        aria-hidden="true"
+      >
+
         <span>DESCUBRA AS MEMÓRIAS</span>
+
         <span class="scroll-line"></span>
+
       </div>
 
     </section>
 
-    <!-- TRANSIÇÃO ENTRE AS SEÇÕES -->
-    <div class="section-transition" aria-hidden="true">
+
+    <!-- TRANSIÇÃO -->
+    <div
+      class="section-transition"
+      aria-hidden="true"
+    >
+
       <span></span>
-      <span class="transition-flower">✿</span>
+
+      <span class="transition-flower">
+        ✿
+      </span>
+
       <span></span>
+
     </div>
 
+
     <!-- GALERIA -->
-    <section id="gallery" class="gallery-section">
+    <section
+      id="gallery"
+      class="gallery-section"
+    >
 
       <header class="gallery-header">
 
-        <p class="small-title">MEMÓRIAS DA TARDE</p>
+        <p class="small-title">
+          MEMÓRIAS DA TARDE
+        </p>
 
         <h2>Nosso álbum</h2>
 
         <p class="gallery-description">
-          Cada foto guarda um pedacinho desta tarde especial.
+          Cada foto guarda um pedacinho
+          desta tarde especial.
         </p>
 
       </header>
 
-      <!-- O script continuará colocando as fotos aqui -->
-      <div id="photosGrid" class="photos-grid"></div>
 
-      <div class="gallery-footer" aria-hidden="true">
+      <!-- FOTOS COLOCADAS PELO SCRIPT -->
+      <div
+        id="photosGrid"
+        class="photos-grid"
+      ></div>
+
+
+      <div
+        class="gallery-footer"
+        aria-hidden="true"
+      >
+
         <span>Com carinho, Júlia</span>
-        <span class="footer-heart">♡</span>
+
+        <span class="footer-heart">
+          ♡
+        </span>
+
       </div>
 
     </section>
 
   </main>
 
-  <!-- Não alterar estes scripts -->
+
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- FUNCIONAMENTO DO SITE -->
   <script src="script.js"></script>
 
 </body>
