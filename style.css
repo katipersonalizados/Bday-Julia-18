@@ -747,3 +747,144 @@ h2 {
     transition: none !important;
   }
 }
+/* ========================================
+   ESCOLHA DE MOLDURA
+======================================== */
+
+.frame-selector {
+  width: 100%;
+  max-width: 390px;
+  margin: 24px auto 25px;
+}
+
+.frame-title {
+  margin: 0 0 13px;
+
+  color: var(--vinho);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.frame-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.frame-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.frame-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.frame-card {
+  position: relative;
+
+  min-height: 145px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+
+  overflow: hidden;
+
+  color: var(--vinho);
+  background: rgba(255, 255, 255, 0.76);
+  border: 2px solid transparent;
+  border-radius: 17px;
+
+  box-shadow: 0 7px 20px rgba(103, 37, 58, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.frame-card img {
+  width: 67px;
+  height: 92px;
+  margin-bottom: 3px;
+
+  display: block;
+  object-fit: contain;
+}
+
+.frame-preview-icon {
+  margin-bottom: 22px;
+  font-size: 40px;
+}
+
+.frame-card strong {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.frame-card small {
+  color: #8a6771;
+  font-size: 9px;
+}
+
+.frame-option input:checked + .frame-card {
+  transform: translateY(-3px);
+
+  border-color: var(--pink);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(255, 235, 241, 0.94)
+    );
+
+  box-shadow:
+    0 10px 24px rgba(232, 21, 88, 0.18);
+}
+
+.frame-option input:checked + .frame-card::after {
+  content: "✓";
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  background: var(--pink);
+  border-radius: 50%;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.frame-option:hover .frame-card {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 380px) {
+  .frame-card {
+    min-height: 135px;
+  }
+
+  .frame-card img {
+    width: 60px;
+    height: 82px;
+  }
+}
