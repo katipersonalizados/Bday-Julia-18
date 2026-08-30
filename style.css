@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f7f3ee;
+  color: #292525;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.hero {
+  min-height: 100vh;
+  padding: 80px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.sparkle {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.small-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+}
+
+h1,
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 60px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 45px;
+}
+
+.subtitle {
+  max-width: 500px;
+  line-height: 1.7;
+  margin: 25px 0 35px;
+}
+
+.upload-button,
+.gallery-button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 16px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-button {
+  background: #292525;
+  color: white;
+}
+
+.gallery-button {
+  color: #292525;
+  margin-top: 20px;
+  border: 1px solid #292525;
+}
+
+.upload-button:hover,
+.gallery-button:hover {
+  transform: scale(1.05);
+}
+
+#status {
+  margin-top: 15px;
+  min-height: 20px;
+}
+
+#gallery {
+  padding: 70px 25px;
+  text-align: center;
+}
+
+.photos-grid {
+  columns: 3;
+  column-gap: 15px;
+  margin-top: 40px;
+}
+
+.photos-grid img {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  display: block;
+}
+
+@media (max-width: 600px) {
+
+  h1 {
+    font-size: 45px;
+  }
+
+  h2 {
+    font-size: 38px;
+  }
+
+  .photos-grid {
+    columns: 2;
+  }
+
+}
