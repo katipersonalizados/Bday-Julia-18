@@ -28,19 +28,15 @@ html {
 body {
   margin: 0;
   overflow-x: hidden;
+
   color: var(--texto);
   background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(248, 168, 191, 0.13),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 40%,
-      rgba(245, 138, 50, 0.09),
-      transparent 30%
-    ),
-    var(--creme);
+    linear-gradient(
+      180deg,
+      #fffdf8 0%,
+      #fff9f0 50%,
+      #fff5eb 100%
+    );
 
   font-family: "Montserrat", sans-serif;
 }
@@ -79,123 +75,55 @@ body {
   background:
     linear-gradient(
       180deg,
-      rgba(255, 253, 248, 0.7),
-      rgba(255, 249, 240, 0.96)
+      rgba(255, 253, 248, 0.55),
+      rgba(255, 249, 240, 0.9)
     );
 }
 
 
 /* ========================================
-   DECORAÇÃO FLORAL EM AQUARELA
+   FLORES EM AQUARELA
 ======================================== */
 
 .floral {
   position: absolute;
   z-index: -1;
-  width: 330px;
-  height: 330px;
+
+  width: clamp(300px, 45vw, 560px);
+  aspect-ratio: 1 / 1;
+
+  background-image: url("flores.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
   pointer-events: none;
-  opacity: 0.93;
-  filter: saturate(1.05);
+  opacity: 0.96;
+
+  filter:
+    drop-shadow(0 12px 22px rgba(103, 37, 58, 0.08))
+    saturate(1.03);
 }
 
 .floral::before,
 .floral::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
+  display: none;
+  content: none;
 }
 
-/* Flores do canto superior */
+/* Flores superiores */
 
 .floral-top {
-  top: -95px;
-  right: -85px;
-
-  background:
-    radial-gradient(
-      ellipse at 47% 45%,
-      #ffe08c 0 6%,
-      #f58a32 7% 20%,
-      #f36f62 21% 38%,
-      transparent 39%
-    ),
-    radial-gradient(
-      ellipse at 78% 25%,
-      #ffe1ec 0 8%,
-      #f8a8bf 9% 27%,
-      #ec4777 28% 43%,
-      transparent 44%
-    ),
-    radial-gradient(
-      ellipse at 73% 71%,
-      #ffc1d2 0 9%,
-      #e81558 10% 30%,
-      #a92352 31% 43%,
-      transparent 44%
-    );
+  top: -120px;
+  right: -155px;
 }
 
-.floral-top::before {
-  width: 100px;
-  height: 180px;
-  top: 105px;
-  left: 55px;
-  transform: rotate(-35deg);
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(96, 118, 74, 0.9),
-      rgba(96, 118, 74, 0.05) 68%,
-      transparent 70%
-    );
-}
-
-/* Flores do canto inferior */
+/* Flores inferiores */
 
 .floral-bottom {
-  bottom: -110px;
-  left: -100px;
-
-  background:
-    radial-gradient(
-      ellipse at 35% 32%,
-      #ffde86 0 7%,
-      #f58a32 8% 25%,
-      #e96942 26% 42%,
-      transparent 43%
-    ),
-    radial-gradient(
-      ellipse at 70% 57%,
-      #ffe5ec 0 8%,
-      #f8a8bf 9% 26%,
-      #ec4777 27% 43%,
-      transparent 44%
-    ),
-    radial-gradient(
-      ellipse at 28% 78%,
-      #ffb4c8 0 8%,
-      #e81558 9% 27%,
-      #a92352 28% 43%,
-      transparent 44%
-    );
-}
-
-.floral-bottom::before {
-  width: 110px;
-  height: 190px;
-  top: 40px;
-  right: 30px;
-  transform: rotate(42deg);
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(96, 118, 74, 0.86),
-      rgba(96, 118, 74, 0.05) 68%,
-      transparent 70%
-    );
+  bottom: -155px;
+  left: -175px;
+  transform: rotate(180deg);
 }
 
 
@@ -206,15 +134,16 @@ body {
 .hero-content {
   position: relative;
   z-index: 2;
+
   width: 100%;
   max-width: 610px;
-
   padding: 35px 24px 38px;
 
   border: 1px solid rgba(236, 71, 119, 0.12);
   border-radius: 34px;
 
-  background: rgba(255, 253, 248, 0.72);
+  background: rgba(255, 253, 248, 0.78);
+
   box-shadow:
     0 25px 70px rgba(103, 37, 58, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -265,6 +194,7 @@ body {
   position: absolute;
   left: 50%;
   top: 46%;
+
   transform: translate(-50%, -50%);
 
   color: rgba(248, 142, 177, 0.45);
@@ -311,6 +241,7 @@ h1 {
   width: 100%;
   max-width: 350px;
   min-height: 58px;
+
   margin-right: auto;
   margin-left: auto;
   padding: 16px 24px;
@@ -365,13 +296,14 @@ h1 {
   margin-top: 14px;
 
   color: var(--vinho);
-  background: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(103, 37, 58, 0.25);
 }
 
 .gallery-button:hover,
 .gallery-button:active {
   transform: translateY(-2px);
+
   color: var(--pink);
   border-color: var(--rosa);
   background: var(--branco);
@@ -380,6 +312,7 @@ h1 {
 .arrow {
   color: var(--pink);
   font-size: 18px;
+
   animation: arrowMovement 1.6s ease-in-out infinite;
 }
 
@@ -401,7 +334,7 @@ h1 {
 
 
 /* ========================================
-   BRILHOS DECORATIVOS
+   BRILHOS
 ======================================== */
 
 .sparkle {
@@ -430,6 +363,7 @@ h1 {
 .sparkle-three {
   right: 16%;
   bottom: 20%;
+
   font-size: 22px;
   animation-delay: 1.4s;
 }
@@ -443,6 +377,7 @@ h1 {
   position: absolute;
   bottom: 25px;
   left: 50%;
+
   transform: translateX(-50%);
 
   display: flex;
@@ -511,34 +446,39 @@ h1 {
 .gallery-section,
 #gallery {
   position: relative;
+
   min-height: 70vh;
   padding: 85px 24px 65px;
+
   text-align: center;
 }
 
+/* Flores discretas na galeria */
+
 .gallery-section::before {
   content: "";
+
   position: absolute;
-  top: 20px;
-  right: -90px;
+  top: -60px;
+  right: -150px;
+  z-index: 0;
 
-  width: 230px;
-  height: 230px;
-  border-radius: 50%;
+  width: 330px;
+  height: 330px;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(248, 168, 191, 0.23),
-      transparent 68%
-    );
+  background-image: url("flores.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 
+  opacity: 0.18;
   pointer-events: none;
 }
 
 .gallery-header {
   position: relative;
   z-index: 1;
+
   max-width: 600px;
   margin: 0 auto;
 }
@@ -567,6 +507,9 @@ h2 {
 ======================================== */
 
 .photos-grid {
+  position: relative;
+  z-index: 1;
+
   width: 100%;
   max-width: 1050px;
   margin: 45px auto 0;
@@ -611,6 +554,9 @@ h2 {
 ======================================== */
 
 .gallery-footer {
+  position: relative;
+  z-index: 1;
+
   margin: 50px auto 0;
 
   display: flex;
@@ -637,7 +583,7 @@ h2 {
   0%,
   100% {
     opacity: 0.4;
-    transform: scale(0.8) rotate(0);
+    transform: scale(0.8) rotate(0deg);
   }
 
   50% {
@@ -674,18 +620,19 @@ h2 {
   }
 
   .floral {
-    width: 250px;
-    height: 250px;
+    width: 310px;
+    height: 310px;
   }
 
   .floral-top {
-    top: -70px;
-    right: -85px;
+    top: -75px;
+    right: -145px;
   }
 
   .floral-bottom {
-    bottom: -65px;
-    left: -95px;
+    bottom: -100px;
+    left: -155px;
+    transform: rotate(180deg);
   }
 
   .event-date {
@@ -738,6 +685,14 @@ h2 {
     padding: 70px 15px 55px;
   }
 
+  .gallery-section::before {
+    top: -40px;
+    right: -150px;
+
+    width: 270px;
+    height: 270px;
+  }
+
   .photos-grid {
     columns: 2;
     column-gap: 11px;
@@ -781,7 +736,10 @@ h2 {
 }
 
 
-/* Reduz animações para quem preferir */
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto !important;
