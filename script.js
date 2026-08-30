@@ -6,7 +6,7 @@ const SUPABASE_URL = "https://vtzdciupcnmhjzfnnplv.supabase.co";
 
 const SUPABASE_ANON_KEY = "sb_publishable_kEWDkp4xw6MyBGC95aRv3A_XsWZ6GWl";
 
-const BUCKET_NAME = "Aniversário de Júlia 18";
+const BUCKET_NAME = "Julia18";
 
 
 // ========================================
