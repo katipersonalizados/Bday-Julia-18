@@ -55,24 +55,103 @@ if (galleryButton) {
 // CARREGAR FOTOS DIRETAMENTE DO BUCKET
 // ==========================================
 
-async function loadPhotos() {
+async function async function loadPhotos() {
 
   photosGrid.innerHTML =
     "<p>Carregando fotos...</p>";
 
+  try {
 
-  const { data, error } =
-    await supabaseClient
-      .storage
-      .from(BUCKET_NAME)
-      .list("", {
-        limit: 100,
-        offset: 0,
-        sortBy: {
-          column: "created_at",
-          order: "desc"
-        }
-      });
+    const { data, error } =
+      await supabaseClient
+        .storage
+        .from(BUCKET_NAME)
+        .list("", {
+          limit: 100,
+          offset: 0
+        });
+
+    if (error) {
+
+      console.error(
+        "ERRO DETALHADO AO LISTAR:",
+        error
+      );
+
+      photosGrid.innerHTML =
+        "<p>ERRO AO CARREGAR: " +
+        error.message +
+        "</p>";
+
+      return;
+    }
+
+    console.log(
+      "ARQUIVOS ENCONTRADOS:",
+      data
+    );
+
+    photosGrid.innerHTML = "";
+
+    if (!data || data.length === 0) {
+
+      photosGrid.innerHTML =
+        "<p class='empty-gallery'>Nenhuma foto encontrada no bucket.</p>";
+
+      return;
+    }
+
+    data.forEach(function (file) {
+
+      if (!file.name) return;
+
+      const { data: publicUrlData } =
+        supabaseClient
+          .storage
+          .from(BUCKET_NAME)
+          .getPublicUrl(file.name);
+
+      const img =
+        document.createElement("img");
+
+      img.src =
+        publicUrlData.publicUrl;
+
+      img.alt =
+        "Foto da festa";
+
+      img.loading =
+        "lazy";
+
+      img.onerror = function () {
+
+        console.error(
+          "ERRO AO ABRIR IMAGEM:",
+          file.name,
+          publicUrlData.publicUrl
+        );
+
+      };
+
+      photosGrid.appendChild(img);
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "ERRO INESPERADO NA GALERIA:",
+      error
+    );
+
+    photosGrid.innerHTML =
+      "<p>ERRO: " +
+      error.message +
+      "</p>";
+
+  }
+
+}
 
 
   // ==========================================
