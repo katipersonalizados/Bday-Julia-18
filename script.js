@@ -124,16 +124,30 @@ async function loadPhotos() {
       const img =
         document.createElement("img");
 
-      img.src = publicUrlData.publicUrl;
-      img.alt = "Foto da festa";
+      /*
+        A foto começa escondida e só aparece
+        depois de carregar corretamente.
+      */
+
+      img.style.display = "none";
+      img.alt = "";
       img.loading = "lazy";
+
+      img.onload = function () {
+        img.style.display = "block";
+      };
 
       img.onerror = function () {
         console.error(
           "ERRO AO ABRIR FOTO:",
           file.name
         );
+
+        // Remove imagens quebradas da galeria
+        img.remove();
       };
+
+      img.src = publicUrlData.publicUrl;
 
       photosGrid.appendChild(img);
     });
